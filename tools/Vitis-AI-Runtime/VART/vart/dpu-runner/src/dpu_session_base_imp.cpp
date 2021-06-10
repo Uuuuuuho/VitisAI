@@ -54,14 +54,22 @@ static std::vector<std::string> get_all_tensor_names(
   return ret;
 }
 
+// #include <iostream>
+// #include <thread>
+
+#define CORE_MAP 1
+
 // my_ to avoid name confliction with the member function.
 size_t DpuSessionBaseImp::my_get_device_core_id(size_t cu_size,
                                                 xir::Attrs* attrs) {
+#if CORE_MAP == 0  
+
+
   CHECK_GT(cu_size, 0u)
       << "cannot create a dpu controller, no device is available";
   auto core_list = ENV_PARAM(XLNX_DPU_DEVICE_CORES);
-
   if (core_list.empty()) {
+    // core_list.resize(2);
     core_list.resize(cu_size);
     std::iota(core_list.begin(), core_list.end(), 0);
   }
@@ -92,6 +100,51 @@ size_t DpuSessionBaseImp::my_get_device_core_id(size_t cu_size,
         << " )";
   }
   return device_core_id;
+
+
+#else
+
+
+  CHECK_GT(cu_size, 0u)
+      << "cannot create a dpu controller, no device is available";
+  auto core_list = ENV_PARAM(XLNX_DPU_DEVICE_CORES);
+
+  if (core_list.empty()) {
+    core_list.resize(cu_size);
+    std::iota(core_list.begin(), core_list.end(), 0);
+  }
+  static auto session_count = 0u;
+  CHECK_GT(core_list.size(), 0u)
+      << "cannot create a dpu session, no core id is available";
+   
+
+  auto device_core_id = core_list[(session_count) % core_list.size()];
+
+
+
+  if (attrs) {
+    auto device_id = 0u;
+    if (!attrs->has_attr("__device_core_id__")) {
+      attrs->set_attr<size_t>("__device_core_id__", device_core_id);
+      device_id = dpu_controller_->get_device_id(device_core_id);
+      attrs->set_attr<size_t>("__device_id__", device_id);
+
+      session_count = session_count + 1u;
+    }
+    device_core_id = attrs->get_attr<size_t>("__device_core_id__");
+
+    if (!attrs_->has_attr("__batch__")) {
+      attrs_->set_attr<size_t>(
+          "__batch__", get_dpu_controller()->get_batch_size(device_core_id));
+    }
+  } else {
+    session_count = session_count + 1u;
+    CHECK_LT(device_core_id, cu_size)
+        << "Invaild device_core_id, device_core_id must < cu_size ( " << cu_size
+        << " )";
+  }
+
+#endif  
 }
 
 DpuSessionBaseImp::DpuSessionBaseImp(xir::Attrs* attrs)

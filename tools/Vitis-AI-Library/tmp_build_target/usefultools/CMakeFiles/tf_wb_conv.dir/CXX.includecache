@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/usefultools/src/tf_wb_conv.cpp
+glog/logging.h
+-
+fstream
+-
+iostream
+-
+

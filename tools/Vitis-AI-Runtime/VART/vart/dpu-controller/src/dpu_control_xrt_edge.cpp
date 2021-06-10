@@ -94,8 +94,10 @@ void DpuControllerXrtEdge::run(size_t core_idx, const uint64_t code,
   static std::vector<std::mutex> mutexes(xrt_cu_->get_num_of_cu());
   auto num_of_cu = xrt_cu_->get_num_of_cu();
   core_idx = core_idx % num_of_cu;
+  // core_idx = core_idx % 3;
 
   std::lock_guard<std::mutex> lock(mutexes[core_idx]);
+  // std::lock_guard<std::mutex> lock(mutexes[2]); // 한번에 하나의 DPU core만 scheudling 
 
   LOG_IF(INFO, ENV_PARAM(DEBUG_DPU_CONTROLLER))
       << std::hex                                          //
@@ -173,6 +175,29 @@ void DpuControllerXrtEdge::run(size_t core_idx, const uint64_t code,
                    << "core_idx = " << core_idx << "\n"
                    << xdpu_get_counter(core_idx);
       });
+
+
+
+
+  // xrt_cu_->run(
+  //     0, func,
+  //     // on_success
+  //     [core_idx, this](xclDeviceHandle handle, uint64_t cu_addr) -> void {
+  //       if (ENV_PARAM(XLNX_SHOW_DPU_COUNTER)) {
+  //         std::cout << "core_idx = " << core_idx << " "
+  //                   << xdpu_get_counter(core_idx) << std::endl;
+  //       }
+  //     },
+  //     // on failure
+  //     [core_idx, this](xclDeviceHandle handle, uint64_t cu_addr) -> void {
+  //       LOG(FATAL) << "dpu timeout! "
+  //                  << "core_idx = " << core_idx << "\n"
+  //                  << xdpu_get_counter(core_idx);
+  //     });
+
+
+
+
 }
 size_t DpuControllerXrtEdge::get_num_of_dpus() const {
   return xrt_cu_->get_num_of_cu();

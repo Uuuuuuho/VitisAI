@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../runner_helper/include/vart/runner_helper.hpp
+vector
+-
+vart/runner.hpp
+../runner_helper/include/vart/vart/runner.hpp
+vitis/ai/dpu_runner.hpp
+../runner_helper/include/vart/vitis/ai/dpu_runner.hpp
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/cpu_task/test/test_cpu_task.cpp
+iostream
+-
+chrono
+-
+thread
+-
+vart/runner.hpp
+-
+xir/graph/graph.hpp
+-
+vart/runner_helper.hpp
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/cpu_task/test/vart/runner_helper.hpp
+vitis/ai/collection_helper.hpp
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/cpu_task/test/vitis/ai/collection_helper.hpp
+

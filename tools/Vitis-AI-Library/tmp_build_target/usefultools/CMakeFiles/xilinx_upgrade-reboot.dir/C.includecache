@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/usefultools/src/reboot.c
+errno.h
+-
+getopt.h
+-
+stdio.h
+-
+stdlib.h
+-
+sys/reboot.h
+-
+time.h
+-
+unistd.h
+-
+

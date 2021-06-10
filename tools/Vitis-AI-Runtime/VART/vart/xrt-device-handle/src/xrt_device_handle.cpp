@@ -30,6 +30,7 @@ void XrtDeviceHandle::registar(
     std::function<std::shared_ptr<XrtDeviceHandle>()> m) {
   auto it = the_factory_methods.begin();
   auto ok = false;
+  // std::tie(it, ok) = the_factory_methods.emplace(std::make_pair(name, 0));
   std::tie(it, ok) = the_factory_methods.emplace(std::make_pair(name, m));
   LOG_IF(INFO, ENV_PARAM(DEBUG_XRT_DEVICE_HANDLE))
       << "add factory method " << name;

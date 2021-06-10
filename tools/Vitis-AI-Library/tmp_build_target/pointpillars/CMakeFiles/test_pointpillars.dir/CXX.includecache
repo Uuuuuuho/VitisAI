@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../pointpillars/include/vitis/ai/pointpillars.hpp
+memory
+-
+vector
+-
+opencv2/core.hpp
+-
+vitis/ai/library/tensor.hpp
+-
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/pointpillars/test/test_pointpillars.cpp
+csignal
+-
+execinfo.h
+-
+iostream
+-
+fstream
+-
+sys/stat.h
+-
+future
+-
+vitis/ai/pointpillars.hpp
+-
+opencv2/opencv.hpp
+-
+vitis/ai/profiling.hpp
+-
+

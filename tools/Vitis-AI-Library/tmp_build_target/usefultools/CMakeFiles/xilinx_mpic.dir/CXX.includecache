@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/usefultools/src/mpic.cpp
+fcntl.h
+-
+glog/logging.h
+-
+sys/ioctl.h
+-
+sys/mman.h
+-
+sys/stat.h
+-
+sys/types.h
+-
+iostream
+-
+opencv2/highgui/highgui.hpp
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/usefultools/src/opencv2/highgui/highgui.hpp
+opencv2/imgproc/imgproc.hpp
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/usefultools/src/opencv2/imgproc/imgproc.hpp
+

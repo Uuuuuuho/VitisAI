@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/test/test_softmax_my.cpp
+arm_neon.h
+-
+cmath
+-
+cstdint
+-
+cstdlib
+-
+iostream
+-
+vector
+-
+unistd.h
+-
+chrono
+-
+random
+-
+string
+-
+

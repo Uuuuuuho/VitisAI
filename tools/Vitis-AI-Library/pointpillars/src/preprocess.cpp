@@ -23,8 +23,15 @@
 #include <eigen3/unsupported/Eigen/CXX11/Tensor>
 #include "./preprocess.hpp"
 
+
+/*
+   given paramter (original version)
+*/
 #define THNUM 2
 DEF_ENV_PARAM(XLNX_POINTPILLARS_PRE_MT, "2");
+
+// #define THNUM 4
+// DEF_ENV_PARAM(XLNX_POINTPILLARS_PRE_MT, "4");
 
 namespace vitis { namespace ai { 
 

@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/usefultools/src/irps5401.c
+errno.h
+-
+fcntl.h
+-
+linux/i2c-dev.h
+-
+linux/i2c.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+sys/ioctl.h
+-
+sys/stat.h
+-
+sys/types.h
+-
+unistd.h
+-
+

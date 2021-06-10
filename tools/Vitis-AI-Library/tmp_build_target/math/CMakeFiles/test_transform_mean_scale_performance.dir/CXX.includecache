@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../math/include/vitis/ai/image_util.hpp
+opencv2/core/core.hpp
+-
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/src/image_util.cpp
+vitis/ai/image_util.hpp
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/src/vitis/ai/image_util.hpp
+arm_neon.h
+-
+math.h
+-
+algorithm
+-
+cstdint
+-
+tuple
+-
+utility
+-
+vector
+-
+vitis/ai/env_config.hpp
+-
+vitis/ai/profiling.hpp
+-
+fstream
+-
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/test/test_transform_mean_scale_performance.cpp
+iostream
+-
+vitis/ai/profiling.hpp
+-
+../src/image_util.cpp
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/src/image_util.cpp
+

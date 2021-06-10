@@ -1,0 +1,95 @@
+src/configurable_dpu_task_imp.hpp:39:  virtual void run(int task_index) override;
+src/configurable_dpu_task_imp.hpp:40:  virtual void run_with_xrt_bo(
+src/dpu_task_imp.cpp:30:#include <vart/experimental/runner_helper.hpp>
+src/dpu_task_imp.cpp:78:static int get_batch_size_of_runner(vart::Runner* r) {
+src/dpu_task_imp.cpp:83:static std::vector<std::unique_ptr<vart::Runner>> create_runners_with_attrs(
+src/dpu_task_imp.cpp:87:  auto runners = std::vector<std::unique_ptr<vart::Runner>>();
+src/dpu_task_imp.cpp:88:  runners.reserve(subgraphs.size());
+src/dpu_task_imp.cpp:92:        << "create runner for " << subgraph->get_name();
+src/dpu_task_imp.cpp:94:      // create the very first runner
+src/dpu_task_imp.cpp:95:      auto r = vart::Runner::create_runner_with_attrs(subgraph, attrs);
+src/dpu_task_imp.cpp:96:      batch_size = get_batch_size_of_runner(r.get());
+src/dpu_task_imp.cpp:97:      runners.emplace_back(std::move(r));
+src/dpu_task_imp.cpp:99:      // the following runners must have the batch size as same as the
+src/dpu_task_imp.cpp:100:      // first runner's.
+src/dpu_task_imp.cpp:101:      auto r = vart::Runner::create_runner_with_attrs(subgraph, attrs);
+src/dpu_task_imp.cpp:102:      CHECK_EQ(get_batch_size_of_runner(r.get()), batch_size)
+src/dpu_task_imp.cpp:103:          << "batch size not same as first runner";
+src/dpu_task_imp.cpp:104:      runners.emplace_back(std::move(r));
+src/dpu_task_imp.cpp:107:        << "create runner for " << subgraph->get_name()
+src/dpu_task_imp.cpp:110:  CHECK_EQ(runners.size(), subgraphs.size());
+src/dpu_task_imp.cpp:111:  return runners;
+src/dpu_task_imp.cpp:118:      runners_{create_runners_with_attrs(graph_holder_, default_attrs_.get())},
+src/dpu_task_imp.cpp:127:      runners_{create_runners_with_attrs(graph_holder_, attrs)},
+src/dpu_task_imp.cpp:176://# call create_runner with directory name for DPUV1
+src/dpu_task_imp.cpp:180:      runners_{vart::Runner::create_runner(dirname_)},
+src/dpu_task_imp.cpp:188:      runners_{vart::Runner::create_runner(dirname_)},
+src/dpu_task_imp.cpp:198:void DpuTaskImp::run(size_t idx) {
+src/dpu_task_imp.cpp:200:      << "running dpu task " << model_name_ << "[" << idx << "]";
+src/dpu_task_imp.cpp:202:      dynamic_cast<vart::RunnerExt*>(runners_[idx].get())->get_inputs();
+src/dpu_task_imp.cpp:204:      dynamic_cast<vart::RunnerExt*>(runners_[idx].get())->get_outputs();
+src/dpu_task_imp.cpp:212:    v = runners_[idx]->execute_async(inputs, outputs);
+src/dpu_task_imp.cpp:219:    v = runners_[idx]->execute_async(inputs, outputs);
+src/dpu_task_imp.cpp:221:  runners_[idx]->wait((int)v.first, -1);
+src/dpu_task_imp.cpp:230:void DpuTaskImp::run_with_xrt_bo(const std::vector<vart::xrt_bo_t>& input_bos) {
+src/dpu_task_imp.cpp:234:      << "running dpu task " << model_name_ << "[" << idx << "]";
+src/dpu_task_imp.cpp:236:  auto input_tensors = runners_[idx].get()->get_input_tensors();
+src/dpu_task_imp.cpp:253:      dynamic_cast<vart::RunnerExt*>(runners_[idx].get())->get_outputs();
+src/dpu_task_imp.cpp:258:    v = runners_[idx]->execute_async(inputs, outputs);
+src/dpu_task_imp.cpp:265:    v = runners_[idx]->execute_async(inputs, outputs);
+src/dpu_task_imp.cpp:267:  runners_[idx]->wait((int)v.first, -1);
+src/dpu_task_imp.cpp:640:  auto dpu_runner_ext = dynamic_cast<vart::RunnerExt*>(runners_[idx].get());
+src/dpu_task_imp.cpp:641:  auto inputs = dpu_runner_ext->get_inputs();
+src/dpu_task_imp.cpp:643:  auto fmt = runners_[idx]->get_tensor_format();
+src/dpu_task_imp.cpp:644:  auto scales = vart::get_input_scale(dpu_runner_ext->get_input_tensors());
+src/dpu_task_imp.cpp:660:  auto dpu_runner_ext = dynamic_cast<vart::RunnerExt*>(runners_[idx].get());
+src/dpu_task_imp.cpp:661:  auto outputs = dpu_runner_ext->get_outputs();
+src/dpu_task_imp.cpp:663:  auto fmt = runners_[idx]->get_tensor_format();
+src/dpu_task_imp.cpp:664:  auto scales = vart::get_output_scale(dpu_runner_ext->get_output_tensors());
+src/dpu_task_imp.cpp:680:  return dynamic_cast<vart::RunnerExt*>(runners_[kernel_idx].get())
+src/dpu_task_imp.cpp:688:  return runners_.size();
+src/dpu_task_imp.cpp:725:  CHECK(!runners_.empty());
+src/dpu_task_imp.cpp:726:  auto the_first_runner = runners_.front().get();
+src/dpu_task_imp.cpp:727:  auto tensors = the_first_runner->get_input_tensors();
+src/dpu_task_imp.hpp:17:#include <vart/runner_ext.hpp>  // from vitis runtime api
+src/dpu_task_imp.hpp:39:  virtual void run(size_t idx) override;
+src/dpu_task_imp.hpp:40:  virtual void run_with_xrt_bo(
+src/dpu_task_imp.hpp:83:  std::vector<std::unique_ptr<vart::Runner>> runners_;
+src/configurable_dpu_task_imp.cpp:318:void ConfigurableDpuTaskImp::run(int task_index) {
+src/configurable_dpu_task_imp.cpp:320:    LOG(INFO) << "running task " << task_index;
+src/configurable_dpu_task_imp.cpp:328:  tasks_->run(task_index);
+src/configurable_dpu_task_imp.cpp:331:void ConfigurableDpuTaskImp::run_with_xrt_bo(
+src/configurable_dpu_task_imp.cpp:334:  tasks_->run_with_xrt_bo(input_bos);
+util/pack.sh:48:cp util/run.sh ${pack_dir}
+include/vitis/ai/dpu_task.hpp:21:#include <vart/experimental/runner_helper.hpp>
+include/vitis/ai/dpu_task.hpp:34: * @brief Base class for run a DPU task.
+include/vitis/ai/dpu_task.hpp:72:  virtual void run(size_t idx) = 0;
+include/vitis/ai/dpu_task.hpp:73:  virtual void run_with_xrt_bo(
+include/vitis/ai/configurable_dpu_task.hpp:51:  virtual void run(int task_index) = 0;
+include/vitis/ai/configurable_dpu_task.hpp:52:  virtual void run_with_xrt_bo(
+Doxyfile:132:# If left blank the directory from which doxygen is run is used as the path to
+Doxyfile:375:# symbols. At the end of a run doxygen will report the cache usage and suggest
+Doxyfile:648:# that represents doxygen's defaults, run doxygen with the -l option. You can
+Doxyfile:652:# Note that if you run doxygen from a directory containing a file called
+Doxyfile:771:# run.
+Doxyfile:1107:# to NO can help when comparing the output of multiple runs.
+Doxyfile:1139:# that directory and running make install will install the docset in
+Doxyfile:1205:# doxygen will try to run the HTML help compiler on the generated index.hhp.
+Doxyfile:1295:# qhelpgenerator. If non-empty doxygen will try to run qhelpgenerator on the
+Doxyfile:1375:# doxygen run you need to manually remove any form_*.png images from the HTML
+Doxyfile:1640:# command to the generated LaTeX files. This will instruct LaTeX to keep running
+Doxyfile:1966:# run, you must also specify the path to the tagfile here.
+Doxyfile:2016:# command. Doxygen will then run the mscgen tool (see:
+Doxyfile:2025:# then run dia to produce the diagram and insert it in the documentation. The
+Doxyfile:2047:# to run in parallel. When set to 0 doxygen will base this on the number of
+Doxyfile:2154:# Note that enabling this option will significantly increase the time of a run.
+Doxyfile:2165:# Note that enabling this option will significantly increase the time of a run.
+Doxyfile:2239:# larger than this value, doxygen will truncate the graph, which is visualized
+Doxyfile:2274:# files in one run (i.e. multiple -o and -T options on the command line). This
+Doxyfile:2275:# makes dot run faster, but since only newer versions of dot (>1.8.10) support
+CMakeLists.txt:54:  PRIVATE xir::xir vart::dpu-runner vart::runner-assistant glog::glog math
+CMakeLists.txt:84:target_link_libraries(test_it ${COMPONENT_NAME} vart::dpu-runner)
+test/test_dpu_task.cpp:34:  dpu_task->run(0u);
+test/test_dpu_task.cpp:35:  std::cout << model_name << " run success" << std::endl;
+test/test_base.cpp:38:  dpu_task->run(0);
+test/test_base.cpp:40:  std::cout << model_name << " run success" << std::endl;

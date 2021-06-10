@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../math/include/vitis/ai/ssd_normalizer.hpp
+cstdint
+-
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/test/test_normalize.cpp
+gtest/gtest.h
+-
+math.h
+-
+algorithm
+-
+time.hpp
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/test/time.hpp
+vitis/ai/ssd_normalizer.hpp
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/test/vitis/ai/ssd_normalizer.hpp
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/test/time.hpp
+chrono
+-
+iostream
+-
+

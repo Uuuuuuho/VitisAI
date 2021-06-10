@@ -48,6 +48,7 @@ std::string TensorBuffer::to_string(TensorBuffer::location_t value) {
   return ret;
 }
 
+// #include <iostream>
 std::string TensorBuffer::to_string() const {
   std::ostringstream out;
   out << "TensorBuffer{"
@@ -81,6 +82,9 @@ std::string TensorBuffer::to_string() const {
   }
   out << "]";
   out << "}";
+
+  // std::cout << "out.str()" << out.str() << std::endl;
+  
   return out.str();
 }
 void TensorBuffer::copy_from_host(size_t batch_idx, const void* buf,

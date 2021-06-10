@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../posedetect/include/vitis/ai/posedetect.hpp
+memory
+-
+opencv2/core.hpp
+-
+vector
+-
+vitis/ai/nnpp/posedetect.hpp
+-
+
+../xnnpp/include/vitis/ai/nnpp/posedetect.hpp
+opencv2/core.hpp
+-
+vitis/ai/library/tensor.hpp
+-
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/posedetect/test/test_pose_detect.cpp
+iostream
+-
+memory
+-
+opencv2/core.hpp
+-
+opencv2/highgui.hpp
+-
+opencv2/imgproc.hpp
+-
+vitis/ai/posedetect.hpp
+-
+vitis/ai/profiling.hpp
+-
+

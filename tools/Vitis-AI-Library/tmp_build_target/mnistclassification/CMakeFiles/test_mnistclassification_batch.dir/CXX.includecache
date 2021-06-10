@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../mnistclassification/include/vitis/ai/mnistclassification.hpp
+memory
+-
+opencv2/core.hpp
+-
+vitis/ai/library/tensor.hpp
+-
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/mnistclassification/test/test_mnistclassification_batch.cpp
+sys/stat.h
+-
+iostream
+-
+opencv2/opencv.hpp
+-
+sstream
+-
+vector
+-
+algorithm
+-
+vitis/ai/mnistclassification.hpp
+-
+

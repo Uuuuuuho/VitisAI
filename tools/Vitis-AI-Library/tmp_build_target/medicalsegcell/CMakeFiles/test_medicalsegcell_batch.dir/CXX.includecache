@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../medicalsegcell/include/vitis/ai/medicalsegcell.hpp
+memory
+-
+opencv2/core.hpp
+-
+vitis/ai/library/tensor.hpp
+-
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/medicalsegcell/test/test_medicalsegcell_batch.cpp
+sys/stat.h
+-
+iostream
+-
+memory
+-
+opencv2/core.hpp
+-
+opencv2/highgui.hpp
+-
+opencv2/imgproc.hpp
+-
+vitis/ai/medicalsegcell.hpp
+-
+

@@ -57,8 +57,10 @@ class DpuRunnerImp : public RunnerExt {
   std::mutex mutex_;
 };
 
+#include <iostream>
 std::unique_ptr<vart::Runner> DpuRunnerFactory::create_dpu_runner(
     const std::string& file_name, const std::string& kernel_name) {
+      std::cout << file_name << "\t" << kernel_name << std::endl;
   return std::make_unique<DpuRunnerImp>(file_name, kernel_name);
 }
 

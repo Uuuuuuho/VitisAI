@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/facedetectrecog/test/test_compare_l20.cpp
+iostream
+-
+opencv2/opencv.hpp
+-
+string
+-
+cstdint
+-
+gtest/gtest.h
+-
+stdio.h
+-
+unistd.h
+-
+fstream
+-
+

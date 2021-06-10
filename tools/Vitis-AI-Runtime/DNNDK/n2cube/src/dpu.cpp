@@ -3518,6 +3518,8 @@ XdpuRunner::execute_async(const std::vector<TensorBuffer *> &inputs,
     std::unordered_map<std::string, std::vector<const float*> > inputPtrs;
     std::unordered_map<std::string, std::vector<float*> > outPtrs;
 
+    printf("\nexecute_async is called!!!!\n");
+
     int batchSize;
 
     for (unsigned j = 0; j < inputs.size(); j++){

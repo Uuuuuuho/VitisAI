@@ -88,7 +88,14 @@ fi
 args+=(-DCMAKE_INSTALL_PREFIX=${install_prefix:="${install_prefix_default}"})
 
 # set build dir
-build_dir_default=$HOME/build/build.${target_info}/${project_name}
+build_dir_default=/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/tmp_build_target/
+
+##########################
+#  original dir path
+# build_dir_default=$HOME/build/build.${target_info}/${project_name}
+##########################
+
+
 [ -z ${build_dir:+x} ] && build_dir=${build_dir_default}
 
 if [ ${show_help:=false} == true ]; then

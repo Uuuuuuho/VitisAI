@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../cpu_task/include/vart/op_imp.h
+vart/vart.h
+-
+xir/xir.h
+-
+string
+-
+vart/runner.hpp
+-
+vector
+-
+xir/op/op.hpp
+-
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/cpu_task/ops/fix2float/fix2float.cpp
+iostream
+-
+vart/op_imp.h
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/cpu_task/ops/fix2float/vart/op_imp.h
+

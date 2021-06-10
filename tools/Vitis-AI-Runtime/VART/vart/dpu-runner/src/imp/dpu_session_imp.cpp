@@ -76,6 +76,7 @@ DpuSessionImp::DpuSessionImp(const std::string& filename,
         filename + ":" + kernel + ":" + std::to_string(device_id);
     kernel_ =
         vitis::ai::WeakStore<std::string, vart::dpu::DpuKernelDdr>::create(
+            // key, filename, kernel, dpu_controller_.get(), 0);
             key, filename, kernel, dpu_controller_.get(), get_device_core_id());
   } else {
     // for hbm arch, we only load kernel per device_core;
@@ -109,6 +110,7 @@ DpuSessionImp::DpuSessionImp(const xir::Subgraph* subgraph, xir::Attrs* attrs)
                             std::to_string(device_id);
     kernel_ =
         vitis::ai::WeakStore<std::string, vart::dpu::DpuKernelDdr>::create(
+            // key, *subgraph, attrs, dpu_controller_.get(), 0);
             key, *subgraph, attrs, dpu_controller_.get(), get_device_core_id());
   } else {
     // for hbm arch, we only load kernel per device_core;
@@ -153,8 +155,10 @@ void DpuSessionImp::initialize() {
   reg_base_ = find_reg_tensor_buffer();
 }
 
+// #include <iostream>
 std::unique_ptr<vart::Runner> DpuSessionImp::create_runner() {
   std::unique_ptr<vart::Runner> ret = nullptr;
+  // auto device_id = 4;
   auto device_id = dpu_controller_->get_device_id(device_core_id_);
   if (is_ddr(device_id)) {
     ret = std::make_unique<vart::dpu::DpuRunnerDdr>(get_input_tensors(),
@@ -164,6 +168,7 @@ std::unique_ptr<vart::Runner> DpuSessionImp::create_runner() {
                                                     get_output_tensors(),  //
                                                     get_device_core_id(), this);
   }
+  // std::cout << ret << std::endl;
   return ret;
 }
 
@@ -188,6 +193,7 @@ void DpuSessionImp::set_subgraph_specific_attrs() {
       dpu_controller_->get_full_name(device_core_id_));
 }
 
+// #include <iostream>
 std::vector<std::unique_ptr<vart::TensorBuffer>>
 DpuSessionImp::init_tensor_buffer(std::vector<my_tensor_t>& my_tensors) {
   auto ret = std::vector<std::unique_ptr<vart::TensorBuffer>>();
@@ -200,6 +206,11 @@ DpuSessionImp::init_tensor_buffer(std::vector<my_tensor_t>& my_tensors) {
       xir_tensors.emplace_back(const_cast<xir::Tensor*>(tensor));
     }
   }
+
+
+  // std::cout << "my_tensors: " << my_tensors.size() << std::endl;
+  // std::cout << "xir_tensors: " << xir_tensors.size() << std::endl;
+
   auto allocator = vart::assistant::TensorBufferAllocator::create(attrs_);
   return allocator->allocate(kernel_->get_subgraph(), xir_tensors, {}).first;
 }

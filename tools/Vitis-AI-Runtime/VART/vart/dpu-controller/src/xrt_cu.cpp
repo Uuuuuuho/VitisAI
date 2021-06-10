@@ -121,12 +121,16 @@ static void print_timestamp(const uint64_t start, const uint64_t end,
   print_one_timestamp(ts);
 }
 
+// #include <iostream>
 void XrtCu::run(size_t device_core_idx, XrtCu::prepare_ecmd_t prepare,
                 callback_t on_success, callback_t on_failure) {
   CHECK_GT(bo_handles_.size(), 0u) << "no cu availabe. cu_name=" << cu_name_;
   struct timespec tp;
   clock_gettime(CLOCK_MONOTONIC, &tp);
   uint64_t start = tp2ns(&tp);
+
+  // device_core_idx = 0;
+  // std::cout << "device_core_idx: " << device_core_idx << std::endl;
 
   device_core_idx = device_core_idx % bo_handles_.size();
   auto ecmd = bo_handles_[device_core_idx].get();
@@ -135,6 +139,14 @@ void XrtCu::run(size_t device_core_idx, XrtCu::prepare_ecmd_t prepare,
   auto handle = bo_handles_[device_core_idx].handle;
   auto bo_handle = bo_handles_[device_core_idx].bo_handle;
   ecmd->cu_mask = cu_mask;
+
+  // std::cout << "ecmd: " << ecmd << std::endl;
+  // std::cout << "cu_mask: " << cu_mask << std::endl;
+  // std::cout << "cu_addr: " << cu_addr << std::endl;
+  // std::cout << "handle: " << handle << std::endl;
+  // std::cout << "bo_handle: " << bo_handle << std::endl;
+  // std::cout << "ecmd->cu_mask: " << ecmd->cu_mask << std::endl;
+
   ecmd->stat_enabled = 1;
   prepare(ecmd);
   LOG_IF(INFO, ENV_PARAM(DEBUG_XRT_CU))

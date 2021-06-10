@@ -44,6 +44,7 @@ static std::vector<std::unique_ptr<xir::BufferObject>> create_bo(
   return ret;
 }
 
+// #include <iostream>
 TensorBufferExtImpHostPhy::TensorBufferExtImpHostPhy(
     const xir::Tensor* tensor, location_t location, size_t device_id,
     const std::string& cu_name, std::shared_ptr<std::vector<char>> content)

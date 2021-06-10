@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/test/prototype_8bit_to_4bit.cpp
+arm_neon.h
+-
+glog/logging.h
+-
+algorithm
+-
+chrono
+-
+cmath
+-
+cstdio
+-
+cstring
+-
+iomanip
+-
+iostream
+-
+random
+-
+sstream
+-
+type_traits
+-
+vitis/ai/env_config.hpp
+-
+

@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../dpu_task/include/vitis/ai/dpu_task.hpp
+cmath
+-
+memory
+-
+opencv2/core.hpp
+-
+vart/assistant/xrt_bo_tensor_buffer.hpp
+-
+vart/experimental/runner_helper.hpp
+-
+vart/zero_copy_helper.hpp
+-
+vector
+-
+vitis/ai/library/tensor.hpp
+-
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/dpu_task/test/test_dpu_task.cpp
+glog/logging.h
+-
+fstream
+-
+iostream
+-
+memory
+-
+vitis/ai/dpu_task.hpp
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/dpu_task/test/vitis/ai/dpu_task.hpp
+

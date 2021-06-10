@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../platenum/include/vitis/ai/platenum.hpp
+memory
+-
+opencv2/core.hpp
+-
+vector
+-
+vitis/ai/nnpp/platenum.hpp
+-
+
+../xnnpp/include/vitis/ai/nnpp/platenum.hpp
+tuple
+-
+vector
+-
+vitis/ai/library/tensor.hpp
+-
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/platenum/test/test_platenum_accuracy.cpp
+glog/logging.h
+-
+cstdlib
+-
+iostream
+-
+fstream
+-
+memory
+-
+opencv2/opencv.hpp
+-
+string
+-
+vitis/ai/platenum.hpp
+-
+

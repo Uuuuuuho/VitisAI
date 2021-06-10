@@ -78,11 +78,15 @@ DpuKernelDdr::~DpuKernelDdr() {
   LOG_IF(INFO, ENV_PARAM(DEBUG_DPU_RUNNER)) << "kernel destoryed";
 }
 
+// #include <iostream>
 void DpuKernelDdr::load_code(const vart::dpu::DpuReg& code) {
   size_t device_id = device_id_;
   std::string cu_name = cu_full_name_;
   auto& mc_code = code.value_;
   auto mc_code_size = mc_code.size();
+  
+  // std::cout << "mc_code_size: " << mc_code_size << std::endl;
+
   codes_.emplace_back(create_buffer_object(mc_code_size, device_id, cu_name));
   auto& code_ = codes_.back();
 

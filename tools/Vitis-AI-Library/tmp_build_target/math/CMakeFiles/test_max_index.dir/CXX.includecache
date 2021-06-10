@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../math/include/vitis/ai/max_index.hpp
+stdint.h
+-
+cstdlib
+-
+vector
+-
+
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/test/test_max_index.cpp
+arm_neon.h
+-
+algorithm
+-
+chrono
+-
+cmath
+-
+cstdio
+-
+cstring
+-
+iostream
+-
+random
+-
+vitis/ai/max_index.hpp
+/home/uho/workspace/Vitis-AI/tools/Vitis-AI-Library/math/test/vitis/ai/max_index.hpp
+

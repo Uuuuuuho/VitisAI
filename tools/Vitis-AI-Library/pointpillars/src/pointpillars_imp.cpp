@@ -30,6 +30,19 @@
 
 #include "second/protos/pipeline.pb.h"
 
+
+/*
+  include headers
+*/
+
+//=====================================
+#include <chrono>
+#include <vitis/ai/time_measure.hpp>
+#include <vitis/ai/stat_samples.hpp>
+//=====================================
+
+
+
 using namespace std;
 namespace vitis {
 namespace ai {
@@ -141,6 +154,7 @@ PointPillarsResult PointPillarsImp::run(const V1F& points) {
   }
 
   __TIC__(PP_total)
+
   __TIC__(PP_pre)
   pre_->process_net0(points);
   __TOC__(PP_pre)
