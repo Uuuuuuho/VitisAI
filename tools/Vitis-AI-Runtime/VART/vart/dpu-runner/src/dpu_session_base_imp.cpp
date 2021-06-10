@@ -58,11 +58,13 @@ static std::vector<std::string> get_all_tensor_names(
 // #include <thread>
 
 #define CORE_MAP 1
-
+#define DPU_CORES 2
+#define NUM_TASKS 2
+#define MOD (DPU_CORES*NUM_TASKS)
 // my_ to avoid name confliction with the member function.
 size_t DpuSessionBaseImp::my_get_device_core_id(size_t cu_size,
                                                 xir::Attrs* attrs) {
-#if CORE_MAP == 0  
+#if CORE_MAP == 1
 
 
   CHECK_GT(cu_size, 0u)
@@ -73,11 +75,23 @@ size_t DpuSessionBaseImp::my_get_device_core_id(size_t cu_size,
     core_list.resize(cu_size);
     std::iota(core_list.begin(), core_list.end(), 0);
   }
-  static auto session_count = 0u;
   CHECK_GT(core_list.size(), 0u)
       << "cannot create a dpu session, no core id is available";
 
-  auto device_core_id = core_list[(session_count) % core_list.size()];
+  //==================================
+  // mapping each thread per DPU core
+  //==================================
+
+  static auto session_count = 0u;
+  session_count %= MOD;
+
+  auto device_core_id = 0u;
+
+  if(session_count < 2) device_core_id = core_list[0];
+  else device_core_id = core_list[1];
+
+
+
   if (attrs) {
     auto device_id = 0u;
     if (!attrs->has_attr("__device_core_id__")) {
@@ -117,11 +131,7 @@ size_t DpuSessionBaseImp::my_get_device_core_id(size_t cu_size,
   CHECK_GT(core_list.size(), 0u)
       << "cannot create a dpu session, no core id is available";
    
-
   auto device_core_id = core_list[(session_count) % core_list.size()];
-
-
-
   if (attrs) {
     auto device_id = 0u;
     if (!attrs->has_attr("__device_core_id__")) {
